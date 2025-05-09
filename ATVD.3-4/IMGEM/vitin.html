@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Raças de Cachorro</title>
+</head>
+<body>
+  <h2>Escolha uma raça:</h2>
+  <select id="raca"></select>
+
+  <h3>Escolha a cor:</h3>
+  <select id="cor"></select>
+
+  <div id="info"></div>
+
+  <script>
+    class Animal {
+      constructor(patas, olhos) {
+        this.patas = patas;
+        this.olhos = olhos;
+      }
+    }
+
+    class Cachorro extends Animal {
+      constructor(patas, olhos, raca, cor) {
+        super(patas, olhos);
+        this.raca = raca;
+        this.cor = cor;
+      }
+    }
+
+    const racas = {
+      "Labrador": {
+        descricao: "Amigável e brincalhão.",
+        cores: ["Preto", "Chocolate", "Amarelo"],
+        imagem: "https://cdn.pixabay.com/photo/2016/02/19/10/00/dog-1207816_1280.jpg"
+      },
+      "Poodle": {
+        descricao: "Inteligente e companheiro.",
+        cores: ["Branco", "Preto"],
+        imagem: "https://cdn.pixabay.com/photo/2014/04/13/20/49/poodle-323242_1280.jpg"
+      }
+    };
+
+    const racaSel = document.getElementById('raca');
+    const corSel = document.getElementById('cor');
+    const info = document.getElementById('info');
+
+    for (let raca in racas) {
+      racaSel.innerHTML += `<option>${raca}</option>`;
+    }
+
+    racaSel.onchange = () => {
+      const cores = racas[racaSel.value].cores;
+      corSel.innerHTML = cores.map(cor => `<option>${cor}</option>`).join('');
+      mostrarInfo();
+    };
+
+    corSel.onchange = mostrarInfo;
+
+    function mostrarInfo() {
+      const raca = racaSel.value;
+      const cor = corSel.value;
+      const dados = racas[raca];
+      const cachorro = new Cachorro(4, 2, raca, cor);
+      info.innerHTML = `
+        <p><strong>${cachorro.raca}</strong> (${cachorro.cor})</p>
+        <p>${dados.descricao}</p>
+        <img src="${dados.imagem}" width="200">
+      `;
+    }
+
+    racaSel.onchange(); // inicia seleção
+  </script>
+</body>
+</html>
