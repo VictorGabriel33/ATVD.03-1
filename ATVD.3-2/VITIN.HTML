@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulação de Dados</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        #result {
+            font-size: 2em;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .dice {
+            display: inline-block;
+            margin: 20px;
+            font-size: 1.5em;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Simulação de Dados</h1>
+    
+    <div>
+        <div class="dice" id="d6">D6: ?</div>
+        <div class="dice" id="d8">D8: ?</div>
+        <div class="dice" id="d20">D20: ?</div>
+    </div>
+
+    <button onclick="girarDados()">Girar Dados</button>
+
+    <div id="result"></div>
+
+    <script>
+        function gerarNumero(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        function girarDados() {
+            // Gerando números aleatórios para os dados
+            const resultadoD6 = gerarNumero(1, 6);
+            const resultadoD8 = gerarNumero(1, 8);
+            const resultadoD20 = gerarNumero(1, 20);
+
+            // Atualizando os elementos HTML
+            document.getElementById("d6").textContent = "D6: " + resultadoD6;
+            document.getElementById("d8").textContent = "D8: " + resultadoD8;
+            document.getElementById("d20").textContent = "D20: " + resultadoD20;
+
+            // Exibindo o resultado
+            document.getElementById("result").textContent = Resultado: D6 = ${resultadoD6}, D8 = ${resultadoD8}, D20 = ${resultadoD20};
+        }
+    </script>
+
+</body>
+</html>
